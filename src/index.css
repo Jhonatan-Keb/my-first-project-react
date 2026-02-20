@@ -1,0 +1,297 @@
+/* =========================================
+   1. FUENTES Y VARIABLES GLOBALES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+:root {
+  --cx-red: #da291c;
+  --cx-red-dark: #b31b11;
+  --cx-dark: #1a1a1a;
+  --cx-gray-bg: #f4f4f4;
+  --cx-white: #ffffff;
+  --cx-text-muted: #666666;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--cx-gray-bg);
+  color: var(--cx-dark);
+  line-height: 1.5;
+}
+
+/* =========================================
+   2. NAVEGACIÓN (HEADER)
+   ========================================= */
+.header {
+  background-color: var(--cx-white);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo {
+  color: var(--cx-red);
+  font-size: 2rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: -1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: var(--cx-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--cx-red);
+}
+
+.header-right span {
+  font-weight: 600;
+  color: var(--cx-text-muted);
+  cursor: pointer;
+}
+
+/* =========================================
+   3. CONTENEDORES GENERALES
+   ========================================= */
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.estrenos-title {
+  color: var(--cx-red);
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 30px 40px 20px;
+}
+
+.category-title {
+  font-size: 1.4rem;
+  color: var(--cx-dark);
+  margin: 30px 40px 10px;
+  border-left: 5px solid var(--cx-red);
+  padding-left: 15px;
+  font-weight: 700;
+}
+
+/* =========================================
+   4. TARJETAS Y CUADRÍCULAS (GRID) - EL CORAZÓN DE LA APP
+   ========================================= */
+.grid-container {
+  display: grid;
+  /* Define que las tarjetas se adapten a un mínimo de 240px, llenando el ancho */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 30px;
+  padding: 10px 40px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--cx-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen formato póster (Películas - Home & Cartelera) */
+.poster-img {
+  width: 100%;
+  aspect-ratio: 2 / 3; /* Mantiene la forma de cartel de cine */
+  object-fit: cover;
+  background-color: #e0e0e0;
+}
+
+/* Imagen formato horizontal (Alimentos/Promociones) */
+.horizontal-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background-color: #e0e0e0;
+}
+
+.card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--cx-dark);
+  margin-bottom: 5px;
+}
+
+.card-subtitle {
+  font-size: 0.9rem;
+  color: var(--cx-text-muted);
+  margin-bottom: 15px;
+}
+
+.card-synopsis {
+  font-size: 0.85rem;
+  color: var(--cx-text-muted);
+  margin-bottom: 20px;
+  text-align: left;
+  line-height: 1.4;
+  /* Recorta el texto a 4 líneas y añade "..." */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-price {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--cx-red);
+  margin-bottom: 15px;
+}
+
+/* =========================================
+   5. BOTONES
+   ========================================= */
+.btn {
+  background-color: var(--cx-red);
+  color: var(--cx-white);
+  border: none;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  margin-top: auto; /* Empuja el botón siempre al fondo */
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--cx-red-dark);
+}
+
+/* =========================================
+   6. RESPONSIVO (MÓVILES)
+   ========================================= */
+@media (max-width: 900px) {
+  /* Modificaciones para el header en móvil */
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px;
+  }
+  
+  .header-left {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .grid-container {
+    padding: 20px; /* Menos padding en móvil */
+  }
+}
+
+/* =========================================
+   7. PÁGINA DE DETALLES DE PELÍCULA
+   ========================================= */
+.detalle-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 30px;
+}
+
+.detalle-img-container {
+  flex: 0 0 300px; /* Ancho fijo para el póster */
+}
+
+.detalle-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  background-color: #ddd;
+}
+
+.detalle-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.detalle-title {
+  font-size: 2.5rem;
+  color: var(--cx-red);
+  margin-bottom: 5px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.detalle-genre {
+  font-size: 1.1rem;
+  color: var(--cx-text-muted);
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.detalle-synopsis {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--cx-dark);
+}
+
+@media (max-width: 768px) {
+  .detalle-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 30px auto;
+  }
+  .detalle-info {
+    align-items: center;
+  }
+}
