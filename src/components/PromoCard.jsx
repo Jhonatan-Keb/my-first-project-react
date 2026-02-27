@@ -1,16 +1,17 @@
-import Button from './Button';
+import Button from "./Button"
 
-const PromoCard = ({ title, description, image, buttonText, onClick }) => {
+function PromoCard({ title, subtitle, synopsis, image, onVerDetalle }) {
   return (
     <div className="card">
-      <img src={image} alt={title} />
+      <img src={image} alt={title} className="poster-img" />
       <div className="card-content">
         <h3 className="card-title">{title}</h3>
-        <p className="card-text">{description}</p>
-        <Button text={buttonText} onClick={onClick} />
+        <p className="card-subtitle">{subtitle}</p>
+        <p className="card-synopsis">{synopsis}</p>
+        <Button text="Ver Promoción" onClick={onVerDetalle} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PromoCard;
+export default PromoCard

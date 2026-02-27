@@ -1,83 +1,84 @@
-import { useState, useEffect } from 'react';
-import { moviesData } from '../moviesData';
-import MovieCard from '../components/MovieCard';
+import { useState, useEffect } from "react"
+import MovieCard from "../components/MovieCard"
+import PromoCard from "../components/PromoCard"
+import Button from "../components/Button"
 
-const Home = ({ onVerDetalle, setVistaActual }) => {
-  const featuredMovies = moviesData.slice(0, 3);
-  
-  // REQUISITO 4: Estado para guardar los datos de la API
-  const [noticias, setNoticias] = useState([]);
+function Home({ movies, promos, cambiarVista, onVerDetalle }) {
+  const [peliculasDestacadas, setPeliculasDestacadas] = useState([])
+  const [promosDestacadas, setPromosDestacadas] = useState([])
 
-  // REQUISITO 4: Consumo Básico de Datos Dinámicos con fetch y useEffect
+  // Seleccionar elementos destacados cuando lleguen los datos por props
   useEffect(() => {
-    // Usamos jsonplaceholder como lo pide la instrucción, limitando a 3 resultados
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=3')
-      .then(response => response.json())
-      .then(data => setNoticias(data))
-      .catch(error => console.error("Error al cargar noticias:", error));
-  }, []);
+    if (movies.length > 0) {
+      const random = [...movies].sort(() => 0.5 - Math.random()).slice(0, 3)
+      setPeliculasDestacadas(random)
+    }
+  }, [movies])
+
+  useEffect(() => {
+    if (promos.length > 0) {
+      const random = [...promos].sort(() => 0.5 - Math.random()).slice(0, 3)
+      setPromosDestacadas(random)
+    }
+  }, [promos])
 
   return (
-    <div className="home-container">
-      <h1 className="page-title" style={{ textAlign: 'center', margin: '40px 0 20px' }}>
-        Destacados de la Semana
-      </h1>
-
-      <div className="grid-container">
-        {featuredMovies.map(movie => (
-          <MovieCard key={movie.id} {...movie} onVerDetalle={() => onVerDetalle(movie)} />
-        ))}
-
-        <div className="card">
-          <img 
-            src="https://images.unsplash.com/photo-1585647347384-2593bc35786b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-            alt="Combo Pareja" 
-            className="poster-img" 
-          />
-          <div className="card-content">
-            <h3 className="card-title">Combo Pareja</h3>
-            <p className="card-subtitle">Alimentos y Dulcería</p>
-            <p className="card-synopsis">
-              Disfruta de tu película favorita con 2 boletos, 1 palomitas grandes y 2 refrescos. ¡El plan perfecto para compartir!
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', marginTop: 'auto' }}>
-              <button className="btn" onClick={() => setVistaActual('alimentos')}>
-                Ver Promoción
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <section className="estrenos-section" style={{ textAlign: 'center', margin: '30px 0 50px' }}>
-        <h2 className="estrenos-title" style={{border: 'none', fontSize: '1.2rem', marginBottom: '20px'}}>
-          ¿Quieres ver más películas?
-        </h2>
-        <div>
-          <button className="btn" onClick={() => setVistaActual('cartelera')} style={{ width: 'auto', padding: '12px 40px', fontSize: '1rem' }}>
-            VER CARTELERA COMPLETA
+    <main>
+      {/* ── Hero Section ── */}
+      <section className="hero-section">
+        <h1 className="hero-title">🌿 Bienvenido a CinePrueba</h1>
+        <p className="hero-subtitle">La sabiduría del Akasha te invita a descubrir las mejores historias</p>
+        <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginTop: "20px" }}>
+          <button className="btn" style={{ width: "auto", padding: "14px 30px" }} onClick={() => cambiarVista("cartelera")}>
+            Ver Cartelera
+          </button>
+          <button className="btn" style={{ width: "auto", padding: "14px 30px", backgroundColor: "var(--text-muted)" }} onClick={() => cambiarVista("otros")}>
+            Ver Promos
           </button>
         </div>
       </section>
 
-      {/* REQUISITO 4: Renderizado de las noticias obtenidas dinámicamente */}
-      <section style={{ padding: '40px 20px', backgroundColor: '#f4f4f4', marginTop: '40px', borderRadius: '8px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '30px', color: '#333' }}>Noticias del Cine (Datos de API)</h2>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-          {noticias.length === 0 ? <p>Cargando noticias...</p> : noticias.map(noticia => (
-            <div key={noticia.id} style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', width: '300px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
-              <h4 style={{ textTransform: 'capitalize', color: 'var(--cx-red)', marginBottom: '10px' }}>
-                {noticia.title.substring(0, 25)}...
-              </h4>
-              <p style={{ fontSize: '0.9rem', color: '#555' }}>
-                {noticia.body.substring(0, 80)}...
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
-};
+      {/* ── Películas Destacadas ── */}
+      <h2 className="page-title">🍃 Estrenos Destacados</h2>
+      <div className="grid-container">
+        {peliculasDestacadas.map((pelicula) => (
+          <MovieCard
+            key={pelicula.id}
+            title={pelicula.title}
+            genre={pelicula.genre}
+            image={pelicula.image}
+            onVerDetalle={() => onVerDetalle(pelicula)}
+          />
+        ))}
+      </div>
 
-export default Home;
+      {/* ── Promos Destacadas ── */}
+      <h2 className="page-title">✨ Promociones Imperdibles</h2>
+      <div className="grid-container">
+        {promosDestacadas.map((promo) => (
+          <PromoCard
+            key={promo.id}
+            title={promo.title}
+            subtitle={promo.subtitle}
+            synopsis={promo.synopsis}
+            image={promo.image}
+            onVerDetalle={() => onVerDetalle(promo)}
+          />
+        ))}
+      </div>
+
+      {/* ── CTA Final ── */}
+      <div style={{ textAlign: "center", margin: "40px 0 60px" }}>
+        <button
+          className="btn"
+          style={{ width: "auto", padding: "16px 40px", fontSize: "1rem" }}
+          onClick={() => cambiarVista("cartelera")}
+        >
+          VER CARTELERA COMPLETA →
+        </button>
+      </div>
+    </main>
+  )
+}
+
+export default Home

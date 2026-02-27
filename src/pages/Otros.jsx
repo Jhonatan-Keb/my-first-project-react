@@ -1,28 +1,23 @@
-import Button from '../components/Button';
+import PromoCard from "../components/PromoCard"
 
-const Otros = () => {
+function Otros({ promos, onVerDetalle }) {
   return (
-    <div>
-      <h1 className="page-title">Más para ti</h1>
+    <main>
+      <h2 className="page-title">🎉 Promociones y Combos</h2>
       <div className="grid-container">
-        <div className="card" style={{ padding: '20px', textAlign: 'center' }}>
-          <h2>Tarjeta Invitado Especial</h2>
-          <p style={{ margin: '15px 0' }}>Sube de nivel y obtén precios especiales en boletos y dulcería.</p>
-          <Button text="Afiliarme" />
-        </div>
-        <div className="card" style={{ padding: '20px', textAlign: 'center' }}>
-          <h2>Combo Lunes</h2>
-          <p style={{ margin: '15px 0' }}>Disfruta 2 boletos, palomitas y refrescos a un precio increíble.</p>
-          <Button text="Ver Promoción" />
-        </div>
-        <div className="card" style={{ padding: '20px', textAlign: 'center' }}>
-          <h2>Formatos Especiales</h2>
-          <p style={{ margin: '15px 0' }}>Vive la magia en pantallas IMAX, Dolby Atmos y Premium.</p>
-          <Button text="Conocer más" />
-        </div>
+        {promos.map((promo) => (
+          <PromoCard
+            key={promo.id}
+            title={promo.title}
+            subtitle={promo.subtitle}
+            synopsis={promo.synopsis}
+            image={promo.image}
+            onVerDetalle={() => onVerDetalle(promo)}
+          />
+        ))}
       </div>
-    </div>
-  );
-};
+    </main>
+  )
+}
 
-export default Otros;
+export default Otros

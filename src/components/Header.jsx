@@ -1,27 +1,56 @@
-const Header = ({ setVistaActual }) => {
+import { useState } from "react"
+
+function Header({ cambiarVista, vistaActual }) {
+  const [tema, setTema] = useState("light")
+
+  const toggleTema = () => {
+    const nuevoTema = tema === "light" ? "dark" : "light"
+    setTema(nuevoTema)
+    document.documentElement.setAttribute("data-theme", nuevoTema === "dark" ? "dark" : "")
+  }
+
   return (
     <header className="header">
-      <div className="header-left">
-        <span onClick={() => setVistaActual('home')} className="logo" style={{ cursor: 'pointer' }}>
-          CINEMEX
-        </span>
-        <nav className="nav-links">
-          <span onClick={() => setVistaActual('cartelera')} style={{ cursor: 'pointer' }}>
-            Cartelera
-          </span>
-          <span onClick={() => setVistaActual('alimentos')} style={{ cursor: 'pointer' }}>
-            Alimentos
-          </span>
-          <span onClick={() => setVistaActual('otros')} style={{ cursor: 'pointer' }}>
-            Promociones
-          </span>
-        </nav>
-      </div>
-      <div className="header-right">
-         <span style={{ fontSize: '0.9rem', cursor: 'pointer' }}>Iniciar Sesión</span>
-      </div>
-    </header>
-  );
-};
+      <span className="logo" style={{ cursor: "pointer" }} onClick={() => cambiarVista("home")}>
+        🌿 CinePrueba
+      </span>
 
-export default Header;
+      <nav className="nav-links">
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); cambiarVista("home") }}
+          style={{ color: vistaActual === "home" ? "var(--primary-color)" : undefined }}
+        >
+          Inicio
+        </a>
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); cambiarVista("cartelera") }}
+          style={{ color: vistaActual === "cartelera" ? "var(--primary-color)" : undefined }}
+        >
+          Cartelera
+        </a>
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); cambiarVista("alimentos") }}
+          style={{ color: vistaActual === "alimentos" ? "var(--primary-color)" : undefined }}
+        >
+          Alimentos
+        </a>
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); cambiarVista("otros") }}
+          style={{ color: vistaActual === "otros" ? "var(--primary-color)" : undefined }}
+        >
+          Promos
+        </a>
+      </nav>
+
+      <button className="theme-toggle-btn" onClick={toggleTema}>
+        {tema === "light" ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
+      </button>
+    </header>
+  )
+}
+
+export default Header

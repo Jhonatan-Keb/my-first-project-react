@@ -1,0 +1,72 @@
+export const promosData = [
+  {
+    id: 1,
+    title: 'Combo Pareja',
+    subtitle: 'Alimentos y Dulcería',
+    synopsis: 'Disfruta de tu película favorita con 2 boletos, 1 palomitas grandes y 2 refrescos. ¡El plan perfecto para compartir!',
+    image: 'https://images.unsplash.com/photo-1585647347384-2593bc35786b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 2,
+    title: 'Mega Combo Nachos',
+    subtitle: 'Para los antojados',
+    synopsis: 'Crujientes nachos con extra queso jalapeño, acompañados de 2 refrescos grandes y 1 hot dog tradicional.',
+    image: 'https://images.unsplash.com/photo-1513442542250-854d436a73f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80' 
+  },
+  {
+    id: 3,
+    title: 'Combo Amigos',
+    subtitle: 'Para compartir',
+    synopsis: '¡Que nadie se quede sin comer! 2 palomitas jumbo (mantequilla o caramelo), 4 refrescos grandes y 2 chocolates.',
+    image: 'https://images.unsplash.com/photo-1572177215152-32f247303126?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 4,
+    title: 'Combo Dulcero',
+    subtitle: 'Postres y Snacks',
+    synopsis: 'Endulza tu función con 1 palomitas acarameladas grandes, 2 frappés del sabor que prefieras y 1 bolsa de M&Ms.',
+    image: 'https://images.unsplash.com/photo-1550005936-397a6064f276?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80' 
+  },
+  {
+    id: 5,
+    title: 'Combo Infantil',
+    subtitle: 'Para los más pequeños',
+    synopsis: 'Palomitas chicas, 1 juguito de manzana y un vaso coleccionable sorpresa de tu película animada favorita.',
+    image: 'https://images.unsplash.com/photo-1560008581-09826d1de69e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 6,
+    title: 'Combo ICEE',
+    subtitle: 'Refrescante',
+    synopsis: 'Combate el calor con 1 palomitas grandes y 2 ICEEs gigantes del sabor que elijas (Cereza, Mora Azul o Mixto).',
+    image: 'https://images.unsplash.com/photo-1556742526-77873634047a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 7,
+    title: 'Promo Estudiante',
+    subtitle: 'Especial Lunes a Jueves',
+    synopsis: 'Presenta tu credencial de estudiante vigente en dulcería y llévate 2 boletos y 1 combo básico por un precio increíble.',
+    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 8,
+    title: 'Combo VIP Platino',
+    subtitle: 'Experiencia Premium',
+    synopsis: 'Disfruta en salas platino con 2 paninis a elección, 1 palomitas jumbo, 2 copas de vino o refrescos y 1 postre.',
+    image: 'https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 9,
+    title: 'Jueves de Estreno',
+    subtitle: 'Promoción de taquilla',
+    synopsis: 'Sé el primero en ver los nuevos estrenos. Compra 3 boletos para funciones de jueves y el cuarto va completamente por nuestra cuenta.',
+    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  },
+  {
+    id: 10,
+    title: 'Combo Hot Dog',
+    subtitle: 'Para el hambre feroz',
+    synopsis: '2 Hot Dogs clásicos con todos los aderezos, 1 palomitas medianas y 2 refrescos grandes para disfrutar tu función.',
+    image: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80'
+  }
+];
