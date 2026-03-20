@@ -36,7 +36,7 @@ function Footer() {
         {/* Columna 3 — Contacto */}
         <div className="footer-contact">
           <h4 className="footer-nav-title">Contacto</h4>
-          <p className="footer-phone">55 5257-6969</p>
+          <p className="footer-phone">+52 999 100 126255 </p>
           <p className="footer-phone-label">Atención telefónica</p>
         </div>
 

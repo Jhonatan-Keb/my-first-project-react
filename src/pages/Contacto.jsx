@@ -24,7 +24,7 @@ function Contacto() {
             <span className="contacto-icon">📞</span>
             <div>
               <strong>Teléfono</strong>
-              999 123 4567
+              +52 999 100 1262
             </div>
           </li>
           <li>
