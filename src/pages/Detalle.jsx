@@ -1,17 +1,40 @@
 import { useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 
-function Detalle({ item, cambiarVista }) {
+function Detalle({ movies, alimentos, promos }) {
+  const { tipo, id } = useParams()
+  const navigate = useNavigate()
+
   // ── 3 estados funcionales (useState) para formulario controlado ──
   const [nombre, setNombre] = useState("")
   const [cantidad, setCantidad] = useState(1)
   const [mensajeConfirmacion, setMensajeConfirmacion] = useState("")
+
+  // ── Buscar el item según tipo e id ──
+  let item = null
+  const idNum = parseInt(id)
+
+  if (tipo === "pelicula") {
+    item = movies.find((m) => m.id === idNum)
+  } else if (tipo === "alimento") {
+    // Alimentos están agrupados por categoría, aplanar para buscar
+    for (const categoria of alimentos) {
+      const found = categoria.items.find((i) => i.id === idNum)
+      if (found) {
+        item = found
+        break
+      }
+    }
+  } else if (tipo === "promo") {
+    item = promos.find((p) => p.id === idNum)
+  }
 
   // Si no hay ítem seleccionado
   if (!item) {
     return (
       <div style={{ textAlign: "center", marginTop: "80px", padding: "40px" }}>
         <h2 style={{ color: "var(--text-main)" }}>No hay elemento seleccionado</h2>
-        <button className="btn" onClick={() => cambiarVista("home")} style={{ width: "auto", marginTop: "20px" }}>
+        <button className="btn" onClick={() => navigate("/")} style={{ width: "auto", marginTop: "20px" }}>
           Volver al Inicio
         </button>
       </div>
@@ -19,14 +42,17 @@ function Detalle({ item, cambiarVista }) {
   }
 
   // ── Detectar tipo de ítem ──
-  const esPelicula = !!item.genre
-  const esAlimento = !!item.price
+  const esPelicula = tipo === "pelicula"
+  const esAlimento = tipo === "alimento"
   // Si no es película ni alimento, es promo
 
   // Título principal del ítem
   const tituloItem = item.title || item.name
   // Subtítulo / info secundaria
   const subtituloItem = item.genre || item.subtitle || item.price || ""
+
+  // ── Ruta de retorno según tipo ──
+  const rutaVolver = esPelicula ? "/cartelera" : esAlimento ? "/alimentos" : "/otros"
 
   // ── Función de envío con e.preventDefault() ──
   const manejarSubmit = (e) => {
@@ -163,7 +189,7 @@ function Detalle({ item, cambiarVista }) {
               <button
                 type="button"
                 className="btn"
-                onClick={() => cambiarVista(esPelicula ? "cartelera" : esAlimento ? "alimentos" : "otros")}
+                onClick={() => navigate(rutaVolver)}
                 style={{ backgroundColor: "var(--text-muted)" }}
               >
                 Volver

@@ -1,6 +1,6 @@
 import MovieCard from "../components/MovieCard"
 
-function Cartelera({ movies, onVerDetalle }) {
+function Cartelera({ movies }) {
   return (
     <main>
       <h2 className="page-title">🎬 Cartelera Completa</h2>
@@ -11,7 +11,7 @@ function Cartelera({ movies, onVerDetalle }) {
             title={pelicula.title}
             genre={pelicula.genre}
             image={pelicula.image}
-            onVerDetalle={() => onVerDetalle(pelicula)}
+            linkTo={`/detalle/pelicula/${pelicula.id}`}
           />
         ))}
       </div>

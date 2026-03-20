@@ -1,6 +1,6 @@
 import FoodCard from "../components/FoodCard"
 
-function Alimentos({ alimentos, onVerDetalle }) {
+function Alimentos({ alimentos }) {
   return (
     <main>
       <h2 className="page-title">🍿 Alimentos y Dulcería</h2>
@@ -15,7 +15,7 @@ function Alimentos({ alimentos, onVerDetalle }) {
                 name={item.name}
                 price={item.price}
                 image={item.image}
-                onVerDetalle={() => onVerDetalle(item)}
+                linkTo={`/detalle/alimento/${item.id}`}
               />
             ))}
           </div>

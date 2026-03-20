@@ -1,6 +1,6 @@
 import PromoCard from "../components/PromoCard"
 
-function Otros({ promos, onVerDetalle }) {
+function Otros({ promos }) {
   return (
     <main>
       <h2 className="page-title">🎉 Promociones y Combos</h2>
@@ -12,7 +12,7 @@ function Otros({ promos, onVerDetalle }) {
             subtitle={promo.subtitle}
             synopsis={promo.synopsis}
             image={promo.image}
-            onVerDetalle={() => onVerDetalle(promo)}
+            linkTo={`/detalle/promo/${promo.id}`}
           />
         ))}
       </div>

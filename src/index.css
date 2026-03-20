@@ -1,397 +1,1053 @@
-/* =========================================
-   1. FUENTES Y VARIABLES GLOBALES (ESTILO NAHIDA)
-   ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+/* =====================================================
+   NAHIDA CINEMA THEME
+   Bosque Sagrado de Sumeru × Sala de Proyección
+   Tipografía: Playfair Display + DM Sans
+   ===================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* =====================================================
+   1. VARIABLES — TEMA NAHIDA (DENDRO)
+   ===================================================== */
 :root {
-  /* TEMA CLARO (Default - Verde Hoja, Blanco y Oro) */
-  --bg-color: #f7fcf8;
-  --surface-color: #ffffff;
-  --text-main: #1c3322;
-  --text-muted: #5e8066;
-  --primary-color: #7bce46;
-  /* Verde Dendro vibrante */
-  --primary-hover: #5ebd3e;
-  --accent-glow: rgba(123, 206, 70, 0.4);
-  --border-color: #e2f0e6;
+  /* TEMA OSCURO — Noche en el Bosque de Sumeru (Default) */
+  --bg-color:        #080e0a;
+  --surface-color:   #0d1610;
+  --surface-raised:  #142019;
+  --surface-hover:   #1a2c20;
+
+  --text-main:       #e8f2e8;
+  --text-muted:      #7a9e82;
+  --text-faint:      #3f5c45;
+
+  --primary-color:   #7bce46;   /* Verde Dendro vibrante */
+  --primary-hover:   #9de86a;
+  --primary-dim:     #4a8a2a;
+  --accent-glow:     rgba(123, 206, 70, 0.22);
+  --accent-glow-lg:  rgba(123, 206, 70, 0.12);
+
+  --gold:            #c9a84c;   /* Detalles dorados — pergaminos del Akasha */
+  --gold-glow:       rgba(201, 168, 76, 0.18);
+
+  --accent-red:      #d94f3a;   /* Rojo butaca */
+
+  --border-color:    rgba(123, 206, 70, 0.18);
+  --border-subtle:   rgba(255, 255, 255, 0.05);
+  --border-gold:     rgba(201, 168, 76, 0.2);
+
+  --card-shadow:     0 8px 40px rgba(0, 0, 0, 0.7);
 }
 
-[data-theme='dark'] {
-  /* TEMA OSCURO (Noche en Sumeru - Verde Bosque Profundo y Verde Neón) */
-  --bg-color: #0b1410;
-  --surface-color: #122119;
-  --text-main: #e2f0e6;
-  --text-muted: #88a892;
-  --primary-color: #9ced68;
-  /* Verde Dendro brillante/neón */
-  --primary-hover: #b0f582;
-  --accent-glow: rgba(156, 237, 104, 0.3);
-  --border-color: #1e3629;
+[data-theme='light'] {
+  /* TEMA CLARO — Jardín del Gran Árbol */
+  --bg-color:        #f2faf3;
+  --surface-color:   #ffffff;
+  --surface-raised:  #edf7ee;
+  --surface-hover:   #e2f2e4;
+
+  --text-main:       #152218;
+  --text-muted:      #4a7554;
+  --text-faint:      #a0c4a8;
+
+  --primary-color:   #5bae2a;
+  --primary-hover:   #4a9620;
+  --primary-dim:     #88c96a;
+  --accent-glow:     rgba(91, 174, 42, 0.2);
+  --accent-glow-lg:  rgba(91, 174, 42, 0.08);
+
+  --gold:            #a8781e;
+  --gold-glow:       rgba(168, 120, 30, 0.15);
+
+  --accent-red:      #c0271f;
+
+  --border-color:    rgba(91, 174, 42, 0.22);
+  --border-subtle:   rgba(0, 0, 0, 0.07);
+  --border-gold:     rgba(168, 120, 30, 0.18);
+
+  --card-shadow:     0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
-* {
+/* =====================================================
+   2. RESET Y BASE
+   ===================================================== */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
-  /* Cambié a Nunito para darle un toque más suave, de "cuento de hadas" */
-  font-family: 'Nunito', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
-  line-height: 1.5;
-  /* Transición suave al cambiar de tema en toda la página */
-  transition: background-color 0.4s ease, color 0.4s ease;
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(123, 206, 70, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(123, 206, 70, 0.04) 0%, transparent 50%);
 }
 
-/* =========================================
-   ANIMACIONES MÁGICAS (DENDRO EFFECTS)
-   ========================================= */
+/* =====================================================
+   ANIMACIONES MÁGICAS DENDRO
+   ===================================================== */
+
 @keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-6px) rotate(0.5deg); }
+  66%       { transform: translateY(-3px) rotate(-0.3deg); }
 }
 
 @keyframes dendroPulse {
-  0% {
-    box-shadow: 0 0 5px var(--accent-glow);
-  }
-
-  50% {
-    box-shadow: 0 0 20px var(--accent-glow);
-  }
-
-  100% {
-    box-shadow: 0 0 5px var(--accent-glow);
-  }
+  0%, 100% { box-shadow: 0 0 8px var(--accent-glow),  0 0 20px transparent; }
+  50%       { box-shadow: 0 0 20px var(--accent-glow), 0 0 50px var(--accent-glow-lg); }
 }
 
-/* =========================================
-   2. NAVEGACIÓN Y BOTÓN DE TEMA
-   ========================================= */
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 8px var(--accent-glow); }
+  50%       { text-shadow: 0 0 22px var(--accent-glow), 0 0 44px var(--accent-glow-lg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spotlightPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50%       { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+@keyframes lineGrow {
+  from { opacity: 0; transform: scaleX(0.3); }
+  to   { opacity: 1; transform: scaleX(1); }
+}
+
+/* =====================================================
+   3. HEADER / NAVEGACIÓN
+   ===================================================== */
 .header {
-  background-color: var(--surface-color);
-  padding: 15px 40px;
+  background-color: rgba(8, 14, 10, 0.93);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  padding: 0 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1000;
+  height: 68px;
   transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
+[data-theme='light'] .header {
+  background-color: rgba(242, 250, 243, 0.94);
+}
+
+/* Línea Dendro superior */
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-dim) 20%,
+    var(--primary-color) 50%,
+    var(--primary-dim) 80%,
+    transparent 100%
+  );
+  animation: lineGrow 1.2s ease both;
+}
+
 .logo {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  font-weight: 800;
-  text-decoration: none;
-  text-shadow: 0 2px 4px var(--accent-glow);
-}
-
-.nav-links {
-  display: flex;
-  gap: 25px;
-}
-
-.nav-links a {
   color: var(--text-main);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
   text-decoration: none;
-  font-weight: 700;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
-  color: var(--primary-color);
+.logo span { color: var(--primary-color); }
+
+.logo::before {
+  content: '🌿';
+  font-size: 1.05rem;
+  filter: drop-shadow(0 0 5px var(--primary-color));
+  animation: floating 4s ease-in-out infinite;
 }
 
-.theme-toggle-btn {
-  background: var(--bg-color);
+.logo:hover span { animation: textGlow 2s ease-in-out infinite; }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 16px; right: 16px;
+  height: 1px;
+  background: var(--primary-color);
+  box-shadow: 0 0 6px var(--accent-glow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--text-main);
+  background: rgba(123, 206, 70, 0.07);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+
+.theme-toggle-btn {
+  background: transparent;
+  color: var(--text-muted);
   border: 1px solid var(--border-color);
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 7px 16px;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  margin-left: 12px;
 }
 
 .theme-toggle-btn:hover {
   background: var(--primary-color);
-  color: #fff;
+  color: #080e0a;
   border-color: var(--primary-color);
+  box-shadow: 0 0 18px var(--accent-glow);
 }
 
-/* =========================================
-   3. TARJETAS Y CUADRÍCULAS (EL TOQUE NAHIDA)
-   ========================================= */
+/* =====================================================
+   4. HERO SECTION
+   ===================================================== */
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 100px 48px 90px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(123, 206, 70, 0.07) 0%,
+    rgba(123, 206, 70, 0.03) 40%,
+    transparent 70%
+  );
+  animation: spotlightPulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, var(--bg-color) 100%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  animation: fadeUp 0.9s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--primary-color);
+  text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow-lg);
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  animation: fadeUp 0.9s 0.15s ease both;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0 32px;
+  animation: fadeUp 0.9s 0.1s ease both;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-divider::before,
+.hero-divider::after {
+  content: '';
+  width: 70px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-dim));
+}
+
+.hero-divider::after {
+  background: linear-gradient(90deg, var(--primary-dim), transparent);
+}
+
+.hero-divider span {
+  color: var(--primary-color);
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  animation: fadeUp 0.9s 0.25s ease both;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-cta .btn {
+  width: auto;
+  padding: 14px 36px;
+  font-size: 0.85rem;
+}
+
+/* =====================================================
+   5. TÍTULOS DE SECCIÓN
+   ===================================================== */
+.estrenos-title,
+.page-title {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-main);
+  font-size: 1.9rem;
+  font-weight: 700;
+  font-style: italic;
+  margin: 52px 48px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.estrenos-title::before,
+.page-title::before {
+  content: '';
+  display: block;
+  width: 4px; height: 30px;
+  background: linear-gradient(180deg, var(--primary-color), var(--primary-dim));
+  border-radius: 2px;
+  box-shadow: 0 0 14px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.estrenos-title::after,
+.page-title::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border-color), transparent);
+  margin-left: 8px;
+}
+
+.category-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin: 36px 48px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.category-title::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--border-subtle);
+}
+
+/* =====================================================
+   6. GRID DE TARJETAS
+   ===================================================== */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
-  padding: 10px 40px 40px;
-  max-width: 1400px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 8px 48px 48px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
+/* =====================================================
+   7. TARJETAS — CARTELERA DENDRO
+   ===================================================== */
 .card {
   background: var(--surface-color);
-  border-radius: 16px;
-  /* Bordes más redondeados y amigables */
-  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
   height: 100%;
+  transition:
+    transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(123,206,70,0.1), transparent);
+  z-index: 1;
 }
 
 .card:hover {
-  /* Animación de flotación estilo elemento Anemo/Dendro al pasar el mouse */
-  animation: floating 3s ease-in-out infinite;
-  box-shadow: 0 15px 30px var(--accent-glow);
-  border-color: var(--primary-color);
+  transform: translateY(-10px);
+  border-color: var(--border-color);
+  animation: dendroPulse 2.5s ease-in-out infinite;
+}
+
+.poster-img-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
 .poster-img {
   width: 100%;
   aspect-ratio: 2 / 3;
   object-fit: cover;
-  background-color: var(--border-color);
+  background: var(--surface-raised);
+  display: block;
+  transition:
+    transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter 0.4s ease;
+}
+
+.card:hover .poster-img {
+  transform: scale(1.05);
+  filter: brightness(0.82) saturate(1.1);
+}
+
+.card-badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--primary-color);
+  color: #080e0a;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px var(--accent-glow);
 }
 
 .horizontal-img {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  background-color: var(--border-color);
+  background: var(--surface-raised);
+  display: block;
+  transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.card:hover .horizontal-img {
+  transform: scale(1.04);
+  filter: brightness(0.82) saturate(1.1);
 }
 
 .card-content {
-  padding: 20px;
+  padding: 18px 20px 20px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  text-align: center;
 }
 
 .card-title {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  line-height: 1.3;
 }
 
 .card-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 15px;
-}
-
-.card-synopsis {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 20px;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.card-price {
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 0.74rem;
   color: var(--primary-color);
-  margin-bottom: 15px;
-}
-
-/* =========================================
-   4. TÍTULOS DE SECCIÓN
-   ========================================= */
-.estrenos-title,
-.page-title {
-  color: var(--primary-color);
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin: 30px 40px 20px;
-  text-shadow: 0 2px 8px var(--accent-glow);
-  /* Brillo mágico en los títulos */
-}
-
-.category-title {
-  font-size: 1.4rem;
-  color: var(--text-main);
-  margin: 30px 40px 10px;
-  border-left: 5px solid var(--primary-color);
-  padding-left: 15px;
-  font-weight: 800;
-}
-
-/* =========================================
-   5. BOTONES MAGNÍFICOS
-   ========================================= */
-.btn {
-  background-color: var(--primary-color);
-  color: #fff;
-  /* Siempre blanco para contraste con el verde */
-  border: none;
-  padding: 12px 15px;
-  border-radius: 25px;
-  /* Botones tipo píldora */
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  width: 100%;
-  margin-top: auto;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px var(--accent-glow);
-}
-
-.btn:hover {
-  background-color: var(--primary-hover);
-  /* Animación de pulso mágico al pasar el mouse por los botones */
-  animation: dendroPulse 1.5s infinite;
-  transform: translateY(-2px);
-}
-
-/* =========================================
-   6. HERO SECTION (HOME)
-   ========================================= */
-.hero-section {
-  text-align: center;
-  padding: 60px 40px;
-  background: linear-gradient(135deg, var(--surface-color) 0%, var(--bg-color) 100%);
-  border-bottom: 2px solid var(--border-color);
-}
-
-.hero-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--primary-color);
-  text-shadow: 0 3px 12px var(--accent-glow);
   margin-bottom: 10px;
 }
 
-.hero-subtitle {
-  font-size: 1.2rem;
+.card-synopsis {
+  font-size: 0.83rem;
   color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 0.78rem;
+  color: var(--gold);
   font-weight: 600;
 }
 
-/* =========================================
-   7. VISTA DETALLE (FLEXBOX LAYOUT)
-   ========================================= */
+.card-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 14px;
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* =====================================================
+   8. BOTONES — ESTILO NAHIDA
+   ===================================================== */
+.btn {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  width: 100%;
+  margin-top: auto;
+  /* La transición incluye background-color para el fill suave */
+  transition:
+    color 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  position: relative;
+  /* Usamos background directo — sin ::before — para evitar que tape el texto */
+  background-image: linear-gradient(to right, var(--primary-color) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right center;
+}
+
+.btn:hover {
+  background-position: left center;   /* El fill Dendro entra desde la izquierda */
+  color: #080e0a;                      /* Texto oscuro legible sobre el verde */
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 22px var(--accent-glow), 0 0 36px var(--accent-glow-lg);
+}
+
+/* Variante sólida */
+.btn-solid {
+  background-image: linear-gradient(to right, var(--primary-hover) 50%, var(--primary-color) 50%);
+  background-size: 200% 100%;
+  background-position: right center;
+  color: #080e0a;
+  box-shadow: 0 2px 14px var(--accent-glow-lg);
+}
+
+.btn-solid:hover {
+  background-position: left center;
+  color: #080e0a;
+  box-shadow: 0 6px 26px var(--accent-glow);
+}
+
+/* Variante roja */
+.btn-danger {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  background-image: linear-gradient(to right, var(--accent-red) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right center;
+}
+
+.btn-danger:hover {
+  background-position: left center;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* Variante dorada (Akasha) */
+.btn-gold {
+  border-color: var(--gold);
+  color: var(--gold);
+  background-image: linear-gradient(to right, var(--gold) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: right center;
+}
+
+.btn-gold:hover {
+  background-position: left center;
+  color: #080e0a;
+  box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+/* =====================================================
+   9. CAROUSEL — SWIPER NAHIDA
+   ===================================================== */
+.carousel-section {
+  padding: 0 32px 52px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.carousel-wrapper { position: relative; }
+
+/* Flechas cristal Dendro */
+.carousel-wrapper .swiper-button-prev,
+.carousel-wrapper .swiper-button-next {
+  color: var(--primary-color);
+  background: rgba(13, 22, 16, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-wrapper .swiper-button-prev::after,
+.carousel-wrapper .swiper-button-next::after {
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.carousel-wrapper .swiper-button-prev:hover,
+.carousel-wrapper .swiper-button-next:hover {
+  background: var(--primary-color);
+  color: #080e0a;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+/* Puntos de paginación Dendro */
+.carousel-wrapper .swiper-pagination-bullet {
+  background: var(--text-faint);
+  opacity: 1;
+  width: 6px; height: 6px;
+  transition: all 0.35s ease;
+}
+
+.carousel-wrapper .swiper-pagination-bullet-active {
+  background: var(--primary-color);
+  width: 22px;
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.carousel-wrapper .swiper-slide {
+  height: auto;
+  padding-bottom: 44px;
+}
+
+.carousel-empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 48px;
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  font-style: italic;
+}
+
+/* =====================================================
+   10. DETALLE DE PELÍCULA
+   ===================================================== */
 .detalle-container {
   display: flex;
-  gap: 40px;
+  gap: 56px;
   max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 40px;
+  margin: 56px auto;
+  padding: 0 48px;
+  animation: fadeUp 0.7s ease both;
 }
 
 .detalle-img-container {
-  flex: 0 0 380px;
+  flex: 0 0 340px;
+  position: relative;
+}
+
+/* Marco Dendro ornamental */
+.detalle-img-container::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 20px var(--accent-glow-lg);
 }
 
 .detalle-img {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 10px 30px var(--accent-glow);
-  border: 2px solid var(--border-color);
+  display: block;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.55), 0 0 40px var(--accent-glow-lg);
 }
 
 .detalle-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalle-rating-badge {
+  display: inline-block;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+  box-shadow: 0 0 8px var(--accent-glow-lg);
 }
 
 .detalle-title {
-  font-size: 2rem;
-  font-weight: 800;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1.1;
   color: var(--text-main);
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .detalle-genre {
-  font-size: 1rem;
+  font-size: 0.78rem;
   color: var(--primary-color);
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.detalle-genre::before { content: '◆'; font-size: 0.5em; }
+
+.detalle-meta {
+  display: flex;
+  gap: 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 20px;
+}
+
+.detalle-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalle-meta-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.detalle-meta-value {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  font-weight: 600;
 }
 
 .detalle-synopsis {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 10px;
+  line-height: 1.85;
+  margin-bottom: 24px;
+  flex-grow: 1;
 }
 
-/* =========================================
-   8. RESPONSIVIDAD
-   ========================================= */
-@media (max-width: 768px) {
+/* =====================================================
+   11. FOOTER — JARDÍN DE NAHIDA
+   ===================================================== */
+.footer {
+  background-color: var(--surface-color);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+  position: relative;
+}
+
+.footer-top-line {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--primary-dim) 20%,
+    var(--primary-color) 50%,
+    var(--primary-dim) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 1px 10px var(--accent-glow-lg);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 48px 40px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--text-main);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.footer-logo::before {
+  content: '🌿';
+  filter: drop-shadow(0 0 4px var(--primary-color));
+}
+
+.footer-logo span {
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.footer-tagline {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 240px;
+  font-style: italic;
+}
+
+.footer-nav-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 18px;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav ul li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.87rem;
+  font-weight: 400;
+  transition: color 0.25s ease, padding-left 0.25s ease;
+  display: inline-block;
+}
+
+.footer-nav ul li a:hover {
+  color: var(--primary-color);
+  padding-left: 6px;
+}
+
+.footer-phone {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.footer-phone-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+  letter-spacing: 0.08em;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding: 16px 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-bottom p {
+  font-size: 0.73rem;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+}
+
+/* =====================================================
+   12. SCROLLBAR DENDRO
+   ===================================================== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: var(--primary-dim); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-color); box-shadow: 0 0 6px var(--accent-glow); }
+
+/* =====================================================
+   13. RESPONSIVIDAD
+   ===================================================== */
+@media (max-width: 900px) {
   .header {
-    flex-direction: column;
-    gap: 12px;
-    padding: 15px 20px;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 24px;
   }
 
   .nav-links {
-    gap: 15px;
+    gap: 4px;
     flex-wrap: wrap;
     justify-content: center;
   }
 
-  .hero-title {
-    font-size: 1.8rem;
-  }
+  .hero-section   { padding: 64px 24px 52px; }
+  .hero-title     { font-size: 2.6rem; }
 
-  .hero-section {
-    padding: 40px 20px;
-  }
+  .estrenos-title,
+  .page-title     { margin: 36px 24px 18px; font-size: 1.5rem; }
+  .category-title { margin: 28px 24px 12px; }
+
+  .grid-container   { padding: 8px 24px 32px; gap: 18px; }
+  .carousel-section { padding: 0 16px 40px; }
 
   .detalle-container {
     flex-direction: column;
-    padding: 0 20px;
+    padding: 0 24px;
+    margin: 36px auto;
+    gap: 28px;
   }
 
   .detalle-img-container {
     flex: none;
-    text-align: center;
-  }
-
-  .detalle-img {
-    max-width: 300px;
+    max-width: 260px;
     margin: 0 auto;
   }
 
-  .page-title,
-  .estrenos-title {
-    margin: 20px 20px 15px;
-    font-size: 1.4rem;
+  .detalle-title { font-size: 2rem; }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 40px 24px 28px;
   }
 
-  .category-title {
-    margin: 20px 20px 10px;
+  .footer-brand   { grid-column: 1 / -1; }
+  .footer-bottom  { padding: 14px 24px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 1.9rem; }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .grid-container {
-    padding: 10px 20px 30px;
-    gap: 20px;
+  .hero-cta .btn {
+    width: 100%;
+    max-width: 280px;
   }
+
+  .footer-content { grid-template-columns: 1fr; gap: 28px; }
 }

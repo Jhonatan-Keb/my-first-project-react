@@ -1,6 +1,6 @@
-import Button from "./Button"
+import { Link } from "react-router-dom"
 
-function PromoCard({ title, subtitle, synopsis, image, onVerDetalle }) {
+function PromoCard({ title, subtitle, synopsis, image, linkTo }) {
   return (
     <div className="card">
       <img src={image} alt={title} className="poster-img" />
@@ -8,7 +8,7 @@ function PromoCard({ title, subtitle, synopsis, image, onVerDetalle }) {
         <h3 className="card-title">{title}</h3>
         <p className="card-subtitle">{subtitle}</p>
         <p className="card-synopsis">{synopsis}</p>
-        <Button text="Ver Promoción" onClick={onVerDetalle} />
+        <Link to={linkTo} className="btn">Ver Promoción</Link>
       </div>
     </div>
   )

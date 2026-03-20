@@ -1,53 +1,43 @@
-import { useState } from "react"
+// src/components/Header.jsx
 
-function Header({ cambiarVista, vistaActual }) {
-  const [tema, setTema] = useState("light")
+import { useState } from "react"
+import { NavLink, Link } from "react-router-dom"
+
+function Header() {
+  // Bug fix #1: el CSS usa dark como default (:root), entonces
+  // el estado inicial debe ser "dark" para que coincidan
+  const [tema, setTema] = useState("dark")
 
   const toggleTema = () => {
-    const nuevoTema = tema === "light" ? "dark" : "light"
+    const nuevoTema = tema === "dark" ? "light" : "dark"
     setTema(nuevoTema)
-    document.documentElement.setAttribute("data-theme", nuevoTema === "dark" ? "dark" : "")
+
+    // Bug fix #2: el CSS tiene [data-theme='light'] para el tema claro
+    // y :root (sin atributo) para el oscuro
+    if (nuevoTema === "light") {
+      document.documentElement.setAttribute("data-theme", "light")
+    } else {
+      document.documentElement.removeAttribute("data-theme")
+    }
   }
 
   return (
     <header className="header">
-      <span className="logo" style={{ cursor: "pointer" }} onClick={() => cambiarVista("home")}>
-        🌿 CinePrueba
-      </span>
+      {/* Bug fix #3: el CSS ya agrega 🌿 vía ::before — quitarlo del JSX */}
+      <Link to="/" className="logo">
+        <span>Cinema</span>
+      </Link>
 
       <nav className="nav-links">
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); cambiarVista("home") }}
-          style={{ color: vistaActual === "home" ? "var(--primary-color)" : undefined }}
-        >
-          Inicio
-        </a>
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); cambiarVista("cartelera") }}
-          style={{ color: vistaActual === "cartelera" ? "var(--primary-color)" : undefined }}
-        >
-          Cartelera
-        </a>
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); cambiarVista("alimentos") }}
-          style={{ color: vistaActual === "alimentos" ? "var(--primary-color)" : undefined }}
-        >
-          Alimentos
-        </a>
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); cambiarVista("otros") }}
-          style={{ color: vistaActual === "otros" ? "var(--primary-color)" : undefined }}
-        >
-          Promos
-        </a>
+        <NavLink to="/" end>Inicio</NavLink>
+        <NavLink to="/cartelera">Cartelera</NavLink>
+        <NavLink to="/alimentos">Alimentos</NavLink>
+        <NavLink to="/otros">Promos</NavLink>
+        <NavLink to="/contacto">Contacto</NavLink>
       </nav>
 
       <button className="theme-toggle-btn" onClick={toggleTema}>
-        {tema === "light" ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
+        {tema === "dark" ? "🌙 Modo Oscuro" : "☀️ Modo Claro"}
       </button>
     </header>
   )

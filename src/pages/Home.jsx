@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react"
-import MovieCard from "../components/MovieCard"
-import PromoCard from "../components/PromoCard"
-import Button from "../components/Button"
+// src/pages/Home.jsx
 
-function Home({ movies, promos, cambiarVista, onVerDetalle }) {
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import MovieCard from "../components/MovieCard"
+import MovieCarousel from "../components/MovieCarousel"   // ← NUEVO
+import PromoCard from "../components/PromoCard"
+
+function Home({ movies, promos }) {
   const [peliculasDestacadas, setPeliculasDestacadas] = useState([])
   const [promosDestacadas, setPromosDestacadas] = useState([])
 
-  // Seleccionar elementos destacados cuando lleguen los datos por props
   useEffect(() => {
     if (movies.length > 0) {
       const random = [...movies].sort(() => 0.5 - Math.random()).slice(0, 3)
@@ -26,20 +28,30 @@ function Home({ movies, promos, cambiarVista, onVerDetalle }) {
     <main>
       {/* ── Hero Section ── */}
       <section className="hero-section">
-        <h1 className="hero-title">🌿 Bienvenido a CinePrueba</h1>
-        <p className="hero-subtitle">La sabiduría del Akasha te invita a descubrir las mejores historias</p>
-        <div style={{ display: "flex", gap: "15px", justifyContent: "center", marginTop: "20px" }}>
-          <button className="btn" style={{ width: "auto", padding: "14px 30px" }} onClick={() => cambiarVista("cartelera")}>
-            Ver Cartelera
-          </button>
-          <button className="btn" style={{ width: "auto", padding: "14px 30px", backgroundColor: "var(--text-muted)" }} onClick={() => cambiarVista("otros")}>
-            Ver Promos
-          </button>
+        <h1 className="hero-title">Bienvenido a <em>DendroCinema</em></h1>
+        <div className="hero-divider"><span>◆</span></div>
+        <p className="hero-subtitle">La mejor experiencia cinematográfica en un solo lugar</p>
+        <div className="hero-cta">
+          <Link to="/cartelera" className="btn btn-solid">
+            <span>Ver Cartelera</span>
+          </Link>
+          <Link to="/otros" className="btn">
+            <span>Ver Promos</span>
+          </Link>
         </div>
       </section>
 
+      {/* ── Carrusel de Estrenos ── */}       {/* ← NUEVO BLOQUE */}
+      <h2 className="estrenos-title">Estrenos</h2>
+      <section className="carousel-section">
+        {movies.length > 0
+          ? <MovieCarousel movies={movies} />
+          : <p className="carousel-empty">Cargando estrenos...</p>
+        }
+      </section>
+
       {/* ── Películas Destacadas ── */}
-      <h2 className="page-title">🍃 Estrenos Destacados</h2>
+      <h2 className="page-title">Destacados</h2>
       <div className="grid-container">
         {peliculasDestacadas.map((pelicula) => (
           <MovieCard
@@ -47,13 +59,13 @@ function Home({ movies, promos, cambiarVista, onVerDetalle }) {
             title={pelicula.title}
             genre={pelicula.genre}
             image={pelicula.image}
-            onVerDetalle={() => onVerDetalle(pelicula)}
+            linkTo={`/detalle/pelicula/${pelicula.id}`}
           />
         ))}
       </div>
 
       {/* ── Promos Destacadas ── */}
-      <h2 className="page-title">✨ Promociones Imperdibles</h2>
+      <h2 className="page-title">Promociones Imperdibles</h2>
       <div className="grid-container">
         {promosDestacadas.map((promo) => (
           <PromoCard
@@ -62,20 +74,17 @@ function Home({ movies, promos, cambiarVista, onVerDetalle }) {
             subtitle={promo.subtitle}
             synopsis={promo.synopsis}
             image={promo.image}
-            onVerDetalle={() => onVerDetalle(promo)}
+            linkTo={`/detalle/promo/${promo.id}`}
           />
         ))}
       </div>
 
       {/* ── CTA Final ── */}
       <div style={{ textAlign: "center", margin: "40px 0 60px" }}>
-        <button
-          className="btn"
-          style={{ width: "auto", padding: "16px 40px", fontSize: "1rem" }}
-          onClick={() => cambiarVista("cartelera")}
-        >
-          VER CARTELERA COMPLETA →
-        </button>
+        <Link to="/cartelera" className="btn btn-solid"
+          style={{ width: "auto", padding: "16px 40px", fontSize: "1rem", display: "inline-block" }}>
+          <span>VER CARTELERA COMPLETA →</span>
+        </Link>
       </div>
     </main>
   )

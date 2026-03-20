@@ -1,23 +1,21 @@
+// src/App.jsx
+
 import { useState, useEffect } from "react"
+import { Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
+import Footer from "./components/Footer"       // ← NUEVO
 import Home from "./pages/Home"
 import Cartelera from "./pages/Cartelera"
 import Alimentos from "./pages/Alimentos"
 import Otros from "./pages/Otros"
 import Detalle from "./pages/Detalle"
+import Contacto from "./pages/Contacto"
 
 function App() {
-  // ── Estado de navegación ──
-  const [vistaActual, setVistaActual] = useState("home")
-  const [itemSeleccionado, setItemSeleccionado] = useState(null)
-  const [refreshKey, setRefreshKey] = useState(0)
-
-  // ── Estados globales para datos (consumo de API local) ──
-  const [movies, setMovies] = useState([])
+  const [movies, setMovies]       = useState([])
   const [alimentos, setAlimentos] = useState([])
-  const [promos, setPromos] = useState([])
+  const [promos, setPromos]       = useState([])
 
-  // ── Consumo de datos con fetch + useEffect ──
   useEffect(() => {
     fetch("/data/movies.json")
       .then((res) => res.json())
@@ -35,56 +33,26 @@ function App() {
       .catch((err) => console.error("Error al cargar promos:", err))
   }, [])
 
-  // ── Funciones de navegación ──
-  const cambiarVista = (vista) => {
-    setVistaActual(vista)
-    setRefreshKey((k) => k + 1)
-    window.scrollTo(0, 0)
-  }
-
-  const onVerDetalle = (item) => {
-    setItemSeleccionado(item)
-    setVistaActual("detalle")
-    window.scrollTo(0, 0)
-  }
-
   return (
-    <div style={{ minHeight: "100vh" }}>
-      <Header cambiarVista={cambiarVista} vistaActual={vistaActual} />
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Header />
 
-      {vistaActual === "home" && (
-        <Home
-          key={refreshKey}
-          movies={movies}
-          promos={promos}
-          cambiarVista={cambiarVista}
-          onVerDetalle={onVerDetalle}
-        />
-      )}
-      {vistaActual === "cartelera" && (
-        <Cartelera
-          movies={movies}
-          onVerDetalle={onVerDetalle}
-        />
-      )}
-      {vistaActual === "alimentos" && (
-        <Alimentos
-          alimentos={alimentos}
-          onVerDetalle={onVerDetalle}
-        />
-      )}
-      {vistaActual === "otros" && (
-        <Otros
-          promos={promos}
-          onVerDetalle={onVerDetalle}
-        />
-      )}
-      {vistaActual === "detalle" && (
-        <Detalle
-          item={itemSeleccionado}
-          cambiarVista={cambiarVista}
-        />
-      )}
+      {/* El main crece para empujar el footer al fondo */}
+      <div style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/"          element={<Home movies={movies} promos={promos} />} />
+          <Route path="/cartelera" element={<Cartelera movies={movies} />} />
+          <Route path="/alimentos" element={<Alimentos alimentos={alimentos} />} />
+          <Route path="/otros"     element={<Otros promos={promos} />} />
+          <Route
+            path="/detalle/:tipo/:id"
+            element={<Detalle movies={movies} alimentos={alimentos} promos={promos} />}
+          />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
+      </div>
+
+      <Footer />   {/* ← NUEVO — fuera de Routes para que aparezca en todas las páginas */}
     </div>
   )
 }
