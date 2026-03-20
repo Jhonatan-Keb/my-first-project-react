@@ -1,16 +1,16 @@
 /* =====================================================
-   NAHIDA CINEMA THEME
-   Bosque Sagrado de Sumeru × Sala de Proyección
+   ESTILOS GENERALES DEL PROYECTO
+   Archivo principal de estilos y variables globales
    Tipografía: Playfair Display + DM Sans
    ===================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 /* =====================================================
-   1. VARIABLES — TEMA NAHIDA (DENDRO)
+   1. VARIABLES DE COLOR Y DISEÑO GLOBALES
    ===================================================== */
 :root {
-  /* TEMA OSCURO — Noche en el Bosque de Sumeru (Default) */
+  /* TEMA OSCURO (Configuración por defecto) */
   --bg-color:        #080e0a;
   --surface-color:   #0d1610;
   --surface-raised:  #142019;
@@ -20,16 +20,16 @@
   --text-muted:      #7a9e82;
   --text-faint:      #3f5c45;
 
-  --primary-color:   #7bce46;   /* Verde Dendro vibrante */
+  --primary-color:   #7bce46;   /* Color primario de la aplicación */
   --primary-hover:   #9de86a;
   --primary-dim:     #4a8a2a;
   --accent-glow:     rgba(123, 206, 70, 0.22);
   --accent-glow-lg:  rgba(123, 206, 70, 0.12);
 
-  --gold:            #c9a84c;   /* Detalles dorados — pergaminos del Akasha */
+  --gold:            #c9a84c;   /* Color de acento secundario (Dorado) */
   --gold-glow:       rgba(201, 168, 76, 0.18);
 
-  --accent-red:      #d94f3a;   /* Rojo butaca */
+  --accent-red:      #d94f3a;   /* Rojo para indicadores y estados de error */
 
   --border-color:    rgba(123, 206, 70, 0.18);
   --border-subtle:   rgba(255, 255, 255, 0.05);
@@ -39,7 +39,7 @@
 }
 
 [data-theme='light'] {
-  /* TEMA CLARO — Jardín del Gran Árbol */
+  /* TEMA CLARO */
   --bg-color:        #f2faf3;
   --surface-color:   #ffffff;
   --surface-raised:  #edf7ee;
@@ -91,7 +91,7 @@ body {
 }
 
 /* =====================================================
-   ANIMACIONES MÁGICAS DENDRO
+   ANIMACIONES GLOBALES
    ===================================================== */
 
 @keyframes floating {
@@ -148,7 +148,7 @@ body {
   background-color: rgba(242, 250, 243, 0.94);
 }
 
-/* Línea Dendro superior */
+/* Línea decorativa superior del encabezado */
 .header::before {
   content: '';
   position: absolute;
@@ -438,7 +438,7 @@ body {
 }
 
 /* =====================================================
-   7. TARJETAS — CARTELERA DENDRO
+   7. TARJETAS — ESTILOS DE CARTELERA
    ===================================================== */
 .card {
   background: var(--surface-color);
@@ -576,7 +576,7 @@ body {
 }
 
 /* =====================================================
-   8. BOTONES — ESTILO NAHIDA
+   8. SISTEMA DE BOTONES
    ===================================================== */
 .btn {
   background: transparent;
@@ -609,7 +609,7 @@ body {
 }
 
 .btn:hover {
-  background-position: left center;   /* El fill Dendro entra desde la izquierda */
+  background-position: left center;   /* Efecto de llenado de fondo desde la izquierda en la interacción */
   color: #080e0a;                      /* Texto oscuro legible sobre el verde */
   border-color: var(--primary-color);
   box-shadow: 0 4px 22px var(--accent-glow), 0 0 36px var(--accent-glow-lg);
@@ -645,7 +645,7 @@ body {
   box-shadow: none;
 }
 
-/* Variante dorada (Akasha) */
+/* Variante de botón para llamados a la acción secundarios */
 .btn-gold {
   border-color: var(--gold);
   color: var(--gold);
@@ -661,7 +661,7 @@ body {
 }
 
 /* =====================================================
-   9. CAROUSEL — SWIPER NAHIDA
+   9. COMPONENTES DE CARRUSEL
    ===================================================== */
 .carousel-section {
   padding: 0 32px 52px;
@@ -671,7 +671,7 @@ body {
 
 .carousel-wrapper { position: relative; }
 
-/* Flechas cristal Dendro */
+/* Botones de control de navegación del carrusel */
 .carousel-wrapper .swiper-button-prev,
 .carousel-wrapper .swiper-button-next {
   color: var(--primary-color);
@@ -698,7 +698,7 @@ body {
   box-shadow: 0 0 20px var(--accent-glow);
 }
 
-/* Puntos de paginación Dendro */
+/* Estilos de los indicadores de paginación */
 .carousel-wrapper .swiper-pagination-bullet {
   background: var(--text-faint);
   opacity: 1;
@@ -744,7 +744,7 @@ body {
   position: relative;
 }
 
-/* Marco Dendro ornamental */
+/* Marco visual ornamental para imágenes */
 .detalle-img-container::before {
   content: '';
   position: absolute;
@@ -848,7 +848,7 @@ body {
 }
 
 /* =====================================================
-   11. FOOTER — JARDÍN DE NAHIDA
+   11. ESTILOS DEL PIE DE PÁGINA
    ===================================================== */
 .footer {
   background-color: var(--surface-color);
@@ -977,7 +977,7 @@ body {
 }
 
 /* =====================================================
-   12. SCROLLBAR DENDRO
+   12. ESTILIZACIÓN DE LA BARRA DE DESPLAZAMIENTO
    ===================================================== */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-color); }
@@ -1050,4 +1050,444 @@ body {
   }
 
   .footer-content { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* =====================================================
+   BLOQUE ADICIONAL DE ESTILOS AVANZADOS
+   Configuración de animaciones, partículas ambientales y mejoras de interfaz
+   ===================================================== */
+
+/* =====================================================
+   A. ESTILOS PARA LA SELECCIÓN DE TEXTO
+   ===================================================== */
+::selection {
+  background: rgba(123, 206, 70, 0.28);
+  color: var(--text-main);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* =====================================================
+   B. REGISTRO DE ANIMACIONES ADICIONALES
+   ===================================================== */
+
+/* Animación de rotación oscilante para elementos flotantes */
+@keyframes leafSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(8deg) scale(1.05); }
+  75%  { transform: rotate(-6deg) scale(0.98); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Animación de ascenso con desvanecimiento */
+@keyframes bubbleUp {
+  0%   { opacity: 0;   transform: translateY(0)   scale(0.6); }
+  30%  { opacity: 1;   transform: translateY(-18px) scale(1); }
+  100% { opacity: 0;   transform: translateY(-60px) scale(0.4); }
+}
+
+/* Animación cíclica de opacidad y escala (latido visual) */
+@keyframes starTwinkle {
+  0%, 100% { opacity: 1;   transform: scale(1)    rotate(0deg); }
+  30%       { opacity: 0.4; transform: scale(0.7)  rotate(15deg); }
+  60%       { opacity: 0.8; transform: scale(1.15) rotate(-10deg); }
+}
+
+/* Animación de entrada en el eje Y (Fade Up) */
+@keyframes fadeUpSoft {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* Animación de balanceo horizontal para elementos interactivos */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(-5deg); }
+  40%       { transform: rotate(5deg); }
+  60%       { transform: rotate(-3deg); }
+  80%       { transform: rotate(3deg); }
+}
+
+/* Brillo que recorre el borde */
+@keyframes borderGlow {
+  0%   { box-shadow: 0 0 0px transparent,   inset 0 0 0px transparent; }
+  50%  { box-shadow: 0 0 18px var(--accent-glow), inset 0 0 8px var(--accent-glow-lg); }
+  100% { box-shadow: 0 0 0px transparent,   inset 0 0 0px transparent; }
+}
+
+/* =====================================================
+   C. PARTÍCULAS DE FONDO AMBIENTAL
+   Usa pseudo-elementos para crear partículas CSS-only
+   ===================================================== */
+
+/* Configuración de partícula ambiental (Superior Izquierda) */
+body::before {
+  content: '🌱';
+  position: fixed;
+  top: 12%;
+  left: 3%;
+  font-size: 1.1rem;
+  opacity: 0.12;
+  pointer-events: none;
+  animation: floating 7s ease-in-out infinite, leafSpin 9s ease-in-out infinite;
+  z-index: 0;
+  filter: blur(0.5px);
+}
+
+/* Configuración de partícula ambiental (Inferior Derecha) */
+body::after {
+  content: '🍃';
+  position: fixed;
+  bottom: 14%;
+  right: 4%;
+  font-size: 1.4rem;
+  opacity: 0.1;
+  pointer-events: none;
+  animation: floating 9s 2s ease-in-out infinite;
+  z-index: 0;
+  filter: blur(0.8px);
+}
+
+/* =====================================================
+   D. DECORACIONES EXTRA EN TÍTULOS
+   ===================================================== */
+
+/* Elemento decorativo dinámico anexo al título principal */
+.hero-title::before {
+  content: '✦ ';
+  color: var(--primary-color);
+  font-size: 0.55em;
+  vertical-align: middle;
+  opacity: 0.7;
+  animation: starTwinkle 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.hero-title::after {
+  content: ' ✦';
+  color: var(--primary-color);
+  font-size: 0.55em;
+  vertical-align: middle;
+  opacity: 0.7;
+  animation: starTwinkle 3s 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Elementos decorativos anexos al contenedor de separación */
+.hero-divider span::before { content: '✿ '; }
+.hero-divider span::after  { content: ' ✿'; }
+
+/* =====================================================
+   E. MICRO-INTERACCIONES Y DETALLES EN TARJETAS
+   ===================================================== */
+
+/* Elemento decorativo que se visualiza al enfocar la tarjeta */
+.card::after {
+  content: '🌿';
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.75rem;
+  opacity: 0;
+  transform: rotate(-20deg) scale(0.6);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card:hover::after {
+  opacity: 0.55;
+  transform: rotate(-10deg) scale(1);
+}
+
+/* Icono o elemento antecedente de la insignia informativa */
+.card-badge::before { content: '✦ '; font-size: 0.7em; }
+
+/* Agregado visual animado para el indicador de calificación */
+.card-rating::before {
+  content: '⭐';
+  font-size: 0.9em;
+  animation: starTwinkle 2.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* =====================================================
+   F. FEEDBACK VISUAL Y MICRO-INTERACCIONES EN BOTONES
+   ===================================================== */
+
+.btn:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease;
+}
+
+/* Efecto visual de enfoque para mejora de la accesibilidad */
+.btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+  animation: wiggle 0.4s ease;
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* =====================================================
+   G. ESTILIZACIÓN DETALLADA PARA VISTAS DE INFORMACIÓN
+   ===================================================== */
+
+/* Ornamento decorativo circundante a la insignia de calificación */
+.detalle-rating-badge::before { content: '🌿 '; font-size: 0.8em; }
+.detalle-rating-badge::after  { content: ' ✦'; font-size: 0.7em; opacity: 0.7; }
+
+/* Efecto de resplandor periódico aplicado a la miniatura o imagen principal */
+.detalle-img {
+  animation: borderGlow 4s ease-in-out infinite;
+}
+
+/* Borde o línea decorativa posterior al título de detalle */
+.detalle-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), transparent);
+  border-radius: 1px;
+  margin-top: 10px;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* =====================================================
+   H. ESTADOS DE INTERACCIÓN EN ENLACES DE NAVEGACIÓN
+   ===================================================== */
+
+/* Indicador visual dinámico adjunto al elemento de navegación activo */
+.nav-links a.active::before {
+  content: '🌿';
+  font-size: 0.7rem;
+  margin-right: 4px;
+  animation: floating 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* =====================================================
+   I. ELEMENTOS DECORATIVOS EN LA SECCIÓN DE PIE DE PÁGINA
+   ===================================================== */
+
+/* Insignias anexas al contenido de texto en la zona inferior del pie de página */
+.footer-bottom p::before {
+  content: '✦ ';
+  color: var(--primary-color);
+  opacity: 0.6;
+  font-size: 0.8em;
+}
+
+.footer-bottom p::after {
+  content: ' ✦';
+  color: var(--primary-color);
+  opacity: 0.6;
+  font-size: 0.8em;
+}
+
+/* Indicadores visuales en la navegación secundaria */
+.footer-nav ul li a::before {
+  content: '›› ';
+  color: var(--primary-dim);
+  font-size: 0.7em;
+  transition: color 0.25s ease;
+}
+
+.footer-nav ul li a:hover::before {
+  content: '🌱 ';
+  color: var(--primary-color);
+}
+
+/* =====================================================
+   J. HOJA DE ESTILOS PARA LA RUTAS DE CONTACTO
+   ===================================================== */
+
+.contacto-container {
+  max-width: 640px;
+  margin: 64px auto;
+  padding: 0 48px;
+  animation: fadeUpSoft 0.7s ease both;
+}
+
+.contacto-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 40px 44px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* Efecto de resplandor o gradiente decorativo en componente contenedor */
+.contacto-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  animation: spotlightPulse 5s ease-in-out infinite;
+}
+
+.contacto-card::after {
+  content: '🌿';
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  font-size: 2.8rem;
+  opacity: 0.07;
+  pointer-events: none;
+  animation: floating 6s ease-in-out infinite;
+}
+
+.contacto-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+.contacto-subtitle::before { content: '✦ '; }
+.contacto-subtitle::after  { content: ' ✦'; }
+
+.contacto-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+
+.contacto-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.contacto-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.contacto-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+
+.contacto-list li:hover {
+  border-color: var(--border-color);
+  background: var(--surface-hover);
+  transform: translateX(4px);
+}
+
+.contacto-list .contacto-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  animation: floating 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px var(--accent-glow));
+}
+
+.contacto-list li:nth-child(2) .contacto-icon { animation-delay: 0.8s; }
+.contacto-list li:nth-child(3) .contacto-icon { animation-delay: 1.6s; }
+
+.contacto-list strong {
+  color: var(--text-main);
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 2px;
+}
+
+.contacto-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0;
+  color: var(--text-faint);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.contacto-divider::before,
+.contacto-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* Horarios */
+.contacto-horarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.horario-item {
+  background: var(--surface-raised);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: border-color 0.3s ease;
+}
+
+.horario-item:hover { border-color: var(--border-color); }
+
+.horario-dia {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 3px;
+}
+
+.horario-hora {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* =====================================================
+   K. PERFILADO AVANZADO PARA LA BARRA DE DESPLAZAMIENTO
+   ===================================================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-dim), var(--primary-color));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* =====================================================
+   L. ESTILOS GLOBALES DE ENFOQUE Y ACCESIBILIDAD
+   ===================================================== */
+*:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
