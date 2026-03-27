@@ -41,14 +41,11 @@ function Home({ movies, promos }) {
         </div>
       </section>
 
-      {/* ── Carrusel de Estrenos ── */}       {/* ← NUEVO BLOQUE */}
-      <h2 className="estrenos-title">Estrenos</h2>
-      <section className="carousel-section">
-        {movies.length > 0
-          ? <MovieCarousel movies={movies} />
-          : <p className="carousel-empty">Cargando estrenos...</p>
-        }
-      </section>
+      {/* ── Carrusel Hero estilo Cinemex ── */}
+      {movies.length > 0
+        ? <MovieCarousel movies={movies} />
+        : <div className="carousel-empty">Cargando estrenos...</div>
+      }
 
       {/* ── Películas Destacadas ── */}
       <h2 className="page-title">Destacados</h2>

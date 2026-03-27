@@ -23,9 +23,8 @@ function Header() {
 
   return (
     <header className="header">
-      {/* Bug fix #3: el CSS ya agrega 🌿 vía ::before — quitarlo del JSX */}
       <Link to="/" className="logo">
-        <span>Cinema</span>
+        Dendro<span>Cinema</span>
       </Link>
 
       <nav className="nav-links">
@@ -37,7 +36,7 @@ function Header() {
       </nav>
 
       <button className="theme-toggle-btn" onClick={toggleTema}>
-        {tema === "dark" ? "🌙 Modo Oscuro" : "☀️ Modo Claro"}
+        {tema === "dark" ? "☀ Claro" : "☾ Oscuro"}
       </button>
     </header>
   )
