@@ -15,7 +15,7 @@ function Footer() {
         {/* Columna 1 — Logo y descripción */}
         <div className="footer-brand">
           <Link to="/" className="footer-logo">
-            ▶ Dendro<span>Cinema</span>
+            ▶ Cine<span>mex</span>
           </Link>
           <p className="footer-tagline">
             La mejor experiencia cinematográfica en un solo lugar.
@@ -44,7 +44,7 @@ function Footer() {
 
       {/* Franja inferior */}
       <div className="footer-bottom">
-        <p>© {year} DendroCinema. Todos los derechos reservados.</p>
+        <p>© {year} Cinemex. Todos los derechos reservados.</p>
       </div>
     </footer>
   )

@@ -209,7 +209,7 @@ function Detalle({ movies, alimentos, promos }) {
               fontWeight: "bold",
               textAlign: "center",
               fontSize: "1rem",
-              animation: "dendroPulse 2s infinite"
+              animation: "cinemexPulse 2s infinite"
             }}>
               {mensajeConfirmacion}
             </div>

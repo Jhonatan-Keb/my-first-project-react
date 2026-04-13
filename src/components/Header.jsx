@@ -24,7 +24,7 @@ function Header() {
   return (
     <header className="header">
       <Link to="/" className="logo">
-        Dendro<span>Cinema</span>
+        Cine<span>mex</span>
       </Link>
 
       <nav className="nav-links">

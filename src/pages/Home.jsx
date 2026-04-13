@@ -28,7 +28,7 @@ function Home({ movies, promos }) {
     <main>
       {/* ── Hero Section ── */}
       <section className="hero-section">
-        <h1 className="hero-title">Bienvenido a <em>DendroCinema</em></h1>
+        <h1 className="hero-title">Bienvenido a <em>Cinemex</em></h1>
         <div className="hero-divider"><span>◆</span></div>
         <p className="hero-subtitle">La mejor experiencia cinematográfica en un solo lugar</p>
         <div className="hero-cta">
