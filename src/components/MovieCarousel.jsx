@@ -1,6 +1,4 @@
-// src/components/MovieCarousel.jsx
-// Carrusel hero estilo Cinemex: banner de pantalla completa con
-// imagen de fondo, poster, título destacado y botones de acción.
+// MovieCarousel — carrusel de películas destacadas
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, Autoplay } from "swiper/modules"
@@ -24,15 +22,15 @@ function MovieCarousel({ movies }) {
         {movies.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div className="hero-slide">
-              {/* Fondo difuminado — usa la misma imagen del poster */}
+              {/* Fondo */}
               <div
                 className="hero-slide-bg"
                 style={{ backgroundImage: `url(${movie.image})` }}
               />
-              {/* Capa de oscurecimiento sobre el fondo */}
+              {/* Overlay */}
               <div className="hero-slide-overlay" />
 
-              {/* Contenido principal del slide */}
+              {/* Contenido */}
               <div className="hero-slide-content">
                 <img
                   src={movie.image}

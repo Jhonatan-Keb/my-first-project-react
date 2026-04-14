@@ -1,16 +1,17 @@
 import { useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import Button from "../components/Button"
 
 function Detalle({ movies, alimentos, promos }) {
   const { tipo, id } = useParams()
   const navigate = useNavigate()
 
-  // ── 3 estados funcionales (useState) para formulario controlado ──
+  // Estados del formulario controlado
   const [nombre, setNombre] = useState("")
   const [cantidad, setCantidad] = useState(1)
   const [mensajeConfirmacion, setMensajeConfirmacion] = useState("")
 
-  // ── Buscar el item según tipo e id ──
+  // Buscar item según tipo e id
   let item = null
   const idNum = parseInt(id)
 
@@ -34,27 +35,25 @@ function Detalle({ movies, alimentos, promos }) {
     return (
       <div style={{ textAlign: "center", marginTop: "80px", padding: "40px" }}>
         <h2 style={{ color: "var(--text-main)" }}>No hay elemento seleccionado</h2>
-        <button className="btn" onClick={() => navigate("/")} style={{ width: "auto", marginTop: "20px" }}>
-          Volver al Inicio
-        </button>
+        <Button text="Volver al Inicio" onClick={() => navigate("/")} />
       </div>
     )
   }
 
-  // ── Detectar tipo de ítem ──
+  // Tipo de item
   const esPelicula = tipo === "pelicula"
   const esAlimento = tipo === "alimento"
   // Si no es película ni alimento, es promo
 
-  // Título principal del ítem
+  // Título y subtítulo
   const tituloItem = item.title || item.name
   // Subtítulo / info secundaria
   const subtituloItem = item.genre || item.subtitle || item.price || ""
 
-  // ── Ruta de retorno según tipo ──
+  // Ruta de retorno
   const rutaVolver = esPelicula ? "/cartelera" : esAlimento ? "/alimentos" : "/otros"
 
-  // ── Función de envío con e.preventDefault() ──
+  // Envío del formulario
   const manejarSubmit = (e) => {
     e.preventDefault()
 
@@ -183,17 +182,15 @@ function Detalle({ movies, alimentos, promos }) {
 
             {/* Botones submit + volver */}
             <div style={{ display: "flex", gap: "15px" }}>
-              <button type="submit" className="btn">
-                {esPelicula ? "Confirmar Compra" : esAlimento ? "Confirmar Pedido" : "Reservar Promo"}
-              </button>
-              <button
-                type="button"
-                className="btn"
+              <Button
+                type="submit"
+                text={esPelicula ? "Confirmar Compra" : esAlimento ? "Confirmar Pedido" : "Reservar Promo"}
+              />
+              <Button
+                text="Volver"
                 onClick={() => navigate(rutaVolver)}
-                style={{ backgroundColor: "var(--text-muted)" }}
-              >
-                Volver
-              </button>
+                tipo="secondary"
+              />
             </div>
           </form>
 

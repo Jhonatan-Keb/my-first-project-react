@@ -1,5 +1,4 @@
-// src/routes/AppRoutes.jsx
-// Archivo dedicado a la definición de rutas de la aplicación
+// AppRoutes — definición de rutas
 
 import { Routes, Route } from "react-router-dom"
 import Home from "../pages/Home"

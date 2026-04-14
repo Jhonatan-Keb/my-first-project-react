@@ -1,4 +1,4 @@
-// src/App.jsx
+// App — componente raíz, carga datos y estructura principal
 
 import { useState, useEffect } from "react"
 import Header from "./components/Header"

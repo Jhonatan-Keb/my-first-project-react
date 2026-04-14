@@ -1,4 +1,4 @@
-// src/pages/Home.jsx
+// Home — página de inicio
 
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"

@@ -537,10 +537,7 @@ button { cursor: pointer; font-family: inherit; }
   align-items: center;
 }
 
-/* ── Imagen de fondo difuminada ──
-   Se usa la misma imagen del poster como fondo, ampliada
-   y muy difuminada para crear profundidad cinematográfica.
-   Se expande -30px en cada lado para ocultar el borde del blur. */
+/* Fondo difuminado */
 .hero-slide-bg {
   position: absolute;
   inset: -30px;
@@ -550,8 +547,7 @@ button { cursor: pointer; font-family: inherit; }
   z-index: 0;
 }
 
-/* ── Gradiente oscuro izquierda → derecha ──
-   Oscurece más el lado del contenido para legibilidad del texto */
+/* Overlay oscuro */
 .hero-slide-overlay {
   position: absolute;
   inset: 0;
@@ -909,7 +905,132 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 /* =====================================================
-   11. RESPONSIVE
+   11. PÁGINA CONTACTO
+   ===================================================== */
+.contacto-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 24px;
+  min-height: 60vh;
+}
+
+.contacto-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 48px;
+  max-width: 560px;
+  width: 100%;
+  animation: fadeUp 0.6s ease both;
+}
+
+.contacto-subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  margin-bottom: 6px;
+}
+
+.contacto-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.contacto-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.contacto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.contacto-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contacto-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.contacto-list li div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contacto-list li strong {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-main);
+}
+
+.contacto-list li div {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.contacto-divider {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+  padding: 16px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 20px;
+}
+
+.contacto-horarios {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.horario-item {
+  text-align: center;
+}
+
+.horario-dia {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.horario-hora {
+  font-size: 0.88rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .contacto-card { padding: 28px 20px; }
+  .contacto-title { font-size: 1.5rem; }
+  .contacto-horarios { flex-direction: column; gap: 16px; }
+}
+
+/* =====================================================
+   12. RESPONSIVE
    ===================================================== */
 @media (max-width: 1024px) {
   .header         { padding: 0 24px; }

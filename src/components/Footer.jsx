@@ -1,4 +1,4 @@
-// src/components/Footer.jsx
+// Footer — pie de página
 
 import { Link } from "react-router-dom"
 

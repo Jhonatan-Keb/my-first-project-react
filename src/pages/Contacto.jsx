@@ -1,4 +1,4 @@
-// src/pages/Contacto.jsx
+// Contacto — información de contacto
 
 function Contacto() {
   return (
